@@ -107,8 +107,8 @@ router.put('/edit/:id', FetchAdmin, [
         if(phone){
             maid.phone = phone 
         }
-        const updatedUser = await user.save()
-        res.status(200).json({ success: true, user: updatedUser })
+        const updatedMaid = await maid.save()
+        res.status(200).json({ success: true, maid: updatedMaid })
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
         console.log(error.message)
