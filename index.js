@@ -4,8 +4,7 @@ const app = require('./app')
 
 // importing 
 const config = require('./config'); 
-// mongoose.connect(config.MONGO_URL,config.MONGOOSE_OPTIONS)
-mongoose.connect("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false")
+mongoose.connect(config.MONGO_URL,config.MONGOOSE_OPTIONS)
 .then(()=>{
     console.log('Connected To Db')
     app.listen( config.PORT, ()=> {
