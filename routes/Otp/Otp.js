@@ -63,7 +63,7 @@ router.get("/request",
               // mail otp to the email address provided
               
               let info = await transporter.sendMail({
-                  from:"udaycodess@gmail.com",
+                  from:"mazibaiteam@gmail.com",
                   to:newOtp.email, 
                   subject:"OTP from Mazibai for Password Reset",
                   text:`
