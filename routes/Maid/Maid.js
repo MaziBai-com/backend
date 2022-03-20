@@ -62,10 +62,11 @@ async (req, res) => {
 })
 
 // ROUTE TO EDIT THE FIELDS 
-router.put('/edit', FetchAdmin, [
+router.put('/edit/:id', FetchAdmin, [
     body('firstName').isLength({ min: 1 }),
     body('phone').isLength({ min: 1 }),
 ], async (req, res) => {
+    let id = req.params.id; 
     let success = false
     try {
         let maid = await Maids.findByIdAndUpdate(id)
