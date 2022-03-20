@@ -112,8 +112,13 @@ async (req,res)=>{
         if(!user){
             return res.status(400).json({success:false,msg:"user with this email doesn't exists"}); 
         }
+        // validate the  otp given 
+        if(code !== otpRequest.code){
+            return res.status(400).json({success:false,msg:"Invalid Otp"})
+        }
+        
         // password match 
-        if(password !== confirmPassword){
+        if(password !== confirmPassword && code===otpRequest.code){
             return res.status(400).json({success:false,msg:"check your password"})
         }
         // password hashing 
