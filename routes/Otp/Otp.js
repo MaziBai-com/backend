@@ -73,7 +73,7 @@ router.get("/request",
                 }, function (error, info) {
                     if (error) {
                         console.log(error.message); 
-                        res.status(400).json({success:false,msg:"Error in sending email"})
+                        res.status(400).json({success:false,msg:"Error in sending email",error:error.message})
                     } else {
                         console.log("Email sent: " + info.response);
                         res.status(200).json({success:true , info:info.response})
