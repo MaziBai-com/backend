@@ -17,6 +17,9 @@ const BookingRoutes = require('./routes/Bookings/Bookings');
 const NotificationRoutes = require('./routes/Notifications/Notifications'); 
 const PasswordResetRoutes = require('./routes/Otp/Otp'); 
 const MaidRoutes = require('./routes/Maid/Maid'); 
+const MaidRefer = require('./routes/Extra/MaidRefer'); 
+const WantJob = require('./routes/Extra/WantJob');
+const PartnerRoutes = require('./routes/Extra/Partner');  
 app.use('/api/auth/user',UserAuthRoutes)
 app.use('/api/reviews',ReviewRoutes)
 app.use('/api/bookings',BookingRoutes); 
@@ -24,6 +27,9 @@ app.use('/api/auth/admin',require('./routes/AdminAuth/AdminAuth'));
 app.use('/api/notifications',NotificationRoutes); 
 app.use('/api/passwordreset',PasswordResetRoutes)
 app.use('/api/maid',MaidRoutes); 
+app.use('/api/maidrefer/',MaidRefer); 
+app.use('/api/job',WantJob); 
+app.use('/api/partner',PartnerRoutes); 
 
 // login user details 
 app.use('/api/user/',require('./routes/loginUser/LoginUser'))

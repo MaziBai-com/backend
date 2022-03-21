@@ -40,17 +40,17 @@ async (req, res) => {
                 
         maid = new Maids({
             maid_id:number.length+10000,
-            firstName:firstName,
-            lastName:lastName,
-            phone:phone,
-            gender:gender,
-            DOB:DOB,
-            village:village,
-            street:street,
-            mandal:mandal,
-            zipcode:zipcode,
-            district:district,
-            state:state
+            firstName:firstName || '',
+            lastName:lastName || '',
+            phone:phone || '',
+            gender:gender || '',
+            DOB:DOB || '',
+            village:village || '',
+            street:street || '',
+            mandal:mandal || '',
+            zipcode:zipcode || '',
+            district:district || '',
+            state:state || ''
         })
         const newmaid = await maid.save();
         success = true
