@@ -15,7 +15,7 @@ const FetchAdmin = require('../FetchAdmin');
 router.post('/register',
 [
     body('firstName').isLength({ min: 1 }),
-    body('phone').isLength({ min: 1 }),
+    body('phone').isLength({ min: 1 })
 ],
 async (req, res) => {
     const errors = validationResult(req);
