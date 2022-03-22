@@ -96,7 +96,7 @@ router.get('/userbookings',FetchUser ,async (req,res)=>{
             res.status(200).json({success:true,bookings});
         }
     } catch (error) {
-        res.status(401).json({ success, msg: "Internal Server Error" })
+        res.status(401).json({ success:false, msg: "Internal Server Error" })
         console.log(error.message)
     }
 })
