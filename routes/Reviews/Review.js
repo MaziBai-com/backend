@@ -7,12 +7,12 @@ const Reviews = require('../../models/Review')
 const FetchUser = require('../FetchUser');
 
 // ROUTER 01 :: SECURED ROUTE :: ADD REVIEW 
-router.post('/add',FetchUser ,async(req,res)=>{
+router.post('/add' ,async(req,res)=>{
     const userId = req.user.id;
     let success = true  
     try {
         let review = new Reviews({
-            user: userId,
+            name:req.body.name , 
             review: req.body.review,
             rating: req.body.rating 
         }) 

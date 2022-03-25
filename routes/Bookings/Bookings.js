@@ -9,32 +9,29 @@ const Bookings = require('../../models/Booking');
 const User = require('../../models/User'); 
 
 // maid booking 
-router.post('/book', FetchUser ,
+router.post('/book',
 [
-    body('email', 'Invalid Email').isEmail()
+    body('phone', 'Invalid Phone').isLength({min:5})
 ],
 async (req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log(errors); 
-        return res.status(401).json({ success:false , msg: "Invalid Email" })
+        return res.status(401).json({ success:false , msg: "Invalid Mobile Number" })
     }
     // find a user with the email / consists or not 
     let user = await User.findById(req.user.id); 
     try {
         if(user.email === req.body.email){
             let booking = new Bookings({
-                firstName:req.body.firstName,
-                lastName:req.body.lastName,
+                name:req.body.name, 
                 email: req.body.email,
                 preferGender:req.body.preferGender,
                 phone:req.body.phone,
                 service:req.body.service,
-                address:{
-                    place:req.body.address.place,
-                    zip:req.body.address.zip,
-                    state:req.body.address.state 
-                },
+                place:req.body.place,
+                text:req.body.text, 
+                zipcode:req.body.zipcode, 
                 status:'Booked'
             })
             const newBooking = await booking.save();

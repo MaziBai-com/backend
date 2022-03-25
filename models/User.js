@@ -5,13 +5,10 @@ const UserSchema = new mongoose.Schema({
         unique:true,
         required:true
     },
-    firstName:{
+    name:{
         type:String,
-        required:true
-    },
-    lastName:{
-        type:String
-    },
+        required:true 
+    }, 
     password:{
         type:String,
         required:true 
@@ -25,11 +22,8 @@ const UserSchema = new mongoose.Schema({
     place:{
         type:String 
     }, 
-    state:{
-        type:String
-    },
     zipcode:{
-        type:String
+        type:String  
     },
     phone:{
         type:String

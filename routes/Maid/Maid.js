@@ -31,7 +31,7 @@ async (req, res) => {
         if(maid.length!=0){
             return res.status(400).json({success:false,msg:"Maid already Exists with this phone"})
         }
-        let {firstName,lastName,phone,gender,zipcode,state} = req.body; 
+        let {name ,phone,gender,zipcode  , place} = req.body; 
         
         // generating maid id 
         console.log('hello')
@@ -40,13 +40,11 @@ async (req, res) => {
                 
         maid = new Maids({
             maid_id:number.length+10000,
-            firstName:firstName || '',
-            lastName:lastName || '',
+            name:name , 
             phone:phone || '',
             gender:gender || '',
             place:place || '',
-            zipcode:zipcode || '',
-            state:state || ''
+            zipcode:zipcode || ''
         })
         const newmaid = await maid.save();
         success = true
@@ -69,19 +67,12 @@ router.put('/edit/:id', FetchAdmin, [
         if (!maid) {            
             return res.status(400).json({ success: false, msg: "Maid Not Found" })
         }
-        const { firstName , lastName , gender , DOB , village , mandal , district , state , zipcode  , phone , street  } = req.body
-        if(firstName){
-            maid.firstName = firstName
-        }
-        if(lastName){
-            maid.lastName = lastName
+        const { name , gender,  zipcode  , phone , place  } = req.body
+        if(name){
+            maid.name = name  
         }
         if(gender){
             maid.gender = gender 
-        }
-        
-        if(state){
-            maid.state = state
         }
         if(zipcode){
             maid.zipcode = zipcode

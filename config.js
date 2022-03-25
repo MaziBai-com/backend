@@ -12,5 +12,3 @@ module.exports = {
     NODEMAILER_PASSWORD:process.env.NODEMAILER_PASSWORD || "Rgukt@123",
     GOOGLE_CLIENT_ID:"746130167111-n7o5qnpn9gns3m0nf75dk72tfton7239.apps.googleusercontent.com"
 }
-
-// booking 

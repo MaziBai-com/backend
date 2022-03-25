@@ -35,7 +35,7 @@ router.post('/collab',
 
 router.get('/getall',async(req,res)=>{
     try {
-        let partners = await Partner.find(); 
+        let partners = await Partner.find().sort({date:-1}); 
         res.status(200).json({ success:true, partners:partners})
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })

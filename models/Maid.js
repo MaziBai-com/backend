@@ -5,13 +5,10 @@ const MaidSchema = new mongoose.Schema({
         unique:true,
         required:true
     },
-    firstName:{
-        type:String,
-        required:true
-    },
-    lastName:{
-        type:String,
-    },
+    name:{
+        type:String, 
+        required:true 
+    }, 
     gender:{
         type:String,
     },
@@ -21,9 +18,6 @@ const MaidSchema = new mongoose.Schema({
         unique:true
     },
     place:{
-        type:String
-    },
-    state:{
         type:String
     },
     zipcode:{

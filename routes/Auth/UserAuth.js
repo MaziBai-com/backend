@@ -36,15 +36,13 @@ async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
     try {
         user = new Users({
-            firstName:req.body.firstName,
-            lastName:'',
+            name:req.body.name , 
             email: req.body.email,
             password:hashedPassword,
             phone:'',
             gender:'',
             place:'',
-            zip:'',
-            state:'',
+            zipcode:'',
             userImg:'uploads/user/default_image.png'
         })
         const newUser = await user.save();
@@ -111,21 +109,15 @@ router.put('/edit', FetchUser, [
         if (!user) {            
             return res.status(400).json({ success: success, msg: "User Not Found" })
         }
-        const { firstName , lastName , gender , place , state , zipcode , userImg , phone  } = req.body
-        if(firstName){
-            user.firstName = firstName
-        }
-        if(lastName){
-            user.lastName = lastName
+        const { name , gender , place , zipcode , userImg , phone  } = req.body
+        if(name){
+            user.name = name 
         }
         if(gender){
             user.gender = gender 
         }
         if(place){
             user.place = place 
-        }
-        if(state){
-            user.state = state
         }
         if(zipcode){
             user.zipcode = zipcode
@@ -197,7 +189,7 @@ router.post('/googlelogin', async (req, res) => {
                         try {
                             user = new Users({
                                 email: email,
-                                firstName: name,
+                                name: name,
                                 password: hashedPassword,
                                 userImg: image
                             })
@@ -225,7 +217,6 @@ router.post('/googlelogin', async (req, res) => {
             } catch (error) {
                 res.status(400).json({success:false , msg: "Internal Server Error" });
                 console.log(error.msg); 
-                return;
             }
 })
 

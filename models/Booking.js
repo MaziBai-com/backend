@@ -2,14 +2,11 @@ const mongoose = require('mongoose')
 const BookingSchema = new mongoose.Schema({
     email:{
         type:String,
+    },
+    name:{
+        type:String, 
         required:true
-    },
-    firstName:{
-        type:String 
-    },
-    lastName:{
-        type:String 
-    },
+    }, 
     preferGender:{
         type:String
     },
@@ -17,18 +14,23 @@ const BookingSchema = new mongoose.Schema({
         type:String,
         required:true 
     },
-    address:{
-        type:Object,
-        required:true 
-    },
     status:{
         type:String,
         required:true
     },
     service:{
-        type:String,
+        type:Array,
         required:true 
     },
+    zipcode:{
+        type:String
+    }, 
+    text:{
+        type:String
+    }, 
+    place:{
+        type:String
+    }, 
     date:{
         type:Date,
         default:Date.now
