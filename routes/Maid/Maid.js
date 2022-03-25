@@ -15,7 +15,7 @@ const FetchAdmin = require('../FetchAdmin');
 router.post('/register',
 [
     body('firstName').isLength({ min: 1 }),
-    body('phone').isLength({ min: 1 })
+    body('phone').isLength({ min: 1 }),
 ],
 async (req, res) => {
     const errors = validationResult(req);
@@ -31,7 +31,7 @@ async (req, res) => {
         if(maid.length!=0){
             return res.status(400).json({success:false,msg:"Maid already Exists with this phone"})
         }
-        let {firstName,lastName,phone,gender,DOB,village,street,mandal,zipcode,district,state} = req.body; 
+        let {firstName,lastName,phone,gender,zipcode,state} = req.body; 
         
         // generating maid id 
         console.log('hello')
@@ -44,12 +44,8 @@ async (req, res) => {
             lastName:lastName || '',
             phone:phone || '',
             gender:gender || '',
-            DOB:DOB || '',
-            village:village || '',
-            street:street || '',
-            mandal:mandal || '',
+            place:place || '',
             zipcode:zipcode || '',
-            district:district || '',
             state:state || ''
         })
         const newmaid = await maid.save();
@@ -83,26 +79,15 @@ router.put('/edit/:id', FetchAdmin, [
         if(gender){
             maid.gender = gender 
         }
-        if(DOB){
-            maid.DOB = DOB 
-        }
-        if(mandal){
-            maid.mandal = mandal
-        }
-        if(village){
-            maid.mandal = mandal
-        }
-        if(district){
-            maid.district = district
-        }
+        
         if(state){
             maid.state = state
         }
         if(zipcode){
             maid.zipcode = zipcode
         }
-        if(street){
-            maid.street = street
+        if(place){
+            maid.street = place 
         }
         if(phone){
             maid.phone = phone 

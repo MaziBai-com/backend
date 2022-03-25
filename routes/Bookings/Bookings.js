@@ -31,11 +31,8 @@ async (req,res)=>{
                 phone:req.body.phone,
                 service:req.body.service,
                 address:{
-                    village:req.body.address.village,
-                    street:req.body.address.street,
-                    mandal:req.body.address.mandal,
+                    place:req.body.address.place,
                     zip:req.body.address.zip,
-                    district:req.body.address.district,
                     state:req.body.address.state 
                 },
                 status:'Booked'

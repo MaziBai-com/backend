@@ -23,8 +23,8 @@ router.post('/wantjob',
             phone:req.body.phone,
             address:{
                 zipcode: req.body.zipcode,
-                district: req.body.district,
-                state:req.body.state
+                state:req.body.state, 
+                place:req.body.place 
             }    
         })
         job = await job.save(); 

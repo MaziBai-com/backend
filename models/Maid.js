@@ -20,16 +20,7 @@ const MaidSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    DOB:{
-        type:Date 
-    },
-    village:{
-        type:String
-    },
-    mandal:{
-        type:String
-    },
-    district:{
+    place:{
         type:String
     },
     state:{

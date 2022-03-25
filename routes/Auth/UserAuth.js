@@ -42,12 +42,8 @@ async (req, res) => {
             password:hashedPassword,
             phone:'',
             gender:'',
-            DOB:'',
-            village:'',
-            street:'',
-            mandal:'',
+            place:'',
             zip:'',
-            district:'',
             state:'',
             userImg:'uploads/user/default_image.png'
         })
@@ -115,7 +111,7 @@ router.put('/edit', FetchUser, [
         if (!user) {            
             return res.status(400).json({ success: success, msg: "User Not Found" })
         }
-        const { firstName , lastName , gender , DOB , village , mandal , district , state , zipcode , userImg , phone  } = req.body
+        const { firstName , lastName , gender , place , state , zipcode , userImg , phone  } = req.body
         if(firstName){
             user.firstName = firstName
         }
@@ -125,17 +121,8 @@ router.put('/edit', FetchUser, [
         if(gender){
             user.gender = gender 
         }
-        if(DOB){
-            user.DOB = DOB 
-        }
-        if(mandal){
-            user.mandal = mandal
-        }
-        if(village){
-            user.mandal = mandal
-        }
-        if(district){
-            user.district = district
+        if(place){
+            user.place = place 
         }
         if(state){
             user.state = state

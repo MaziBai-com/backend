@@ -22,18 +22,9 @@ const UserSchema = new mongoose.Schema({
     gender:{
         type:String
     },
-    DOB:{
-        type:Date 
-    },
-    village:{
-        type:String
-    },
-    mandal:{
-        type:String
-    },
-    district:{
-        type:String
-    },
+    place:{
+        type:String 
+    }, 
     state:{
         type:String
     },
