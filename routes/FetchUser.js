@@ -13,7 +13,6 @@ const FetchUser = (req,res,next)=>{
         next()
     } catch (error) {
         res.status(401).send({success,msg:"Internal Server Error"})
-        console.log(error.message)
     }
 }
 module.exports = FetchUser 

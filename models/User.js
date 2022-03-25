@@ -5,13 +5,10 @@ const UserSchema = new mongoose.Schema({
         unique:true,
         required:true
     },
-    firstName:{
+    name:{
         type:String,
-        required:true
-    },
-    lastName:{
-        type:String
-    },
+        required:true 
+    }, 
     password:{
         type:String,
         required:true 
@@ -22,23 +19,11 @@ const UserSchema = new mongoose.Schema({
     gender:{
         type:String
     },
-    DOB:{
-        type:Date 
-    },
-    village:{
-        type:String
-    },
-    mandal:{
-        type:String
-    },
-    district:{
-        type:String
-    },
-    state:{
-        type:String
-    },
+    place:{
+        type:String 
+    }, 
     zipcode:{
-        type:String
+        type:Number   
     },
     phone:{
         type:String

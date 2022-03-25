@@ -5,6 +5,7 @@ const {body , validationResult } = require('express-validator');
 
 // model 
 const WantJob = require('../../models/WantJob');
+// const FetchAdmin = require('../FetchAdmin');
 
 // add job 
 router.post('/wantjob',
@@ -21,27 +22,22 @@ router.post('/wantjob',
         let job = new WantJob({
             name:req.body.name,
             phone:req.body.phone,
-            address:{
-                zipcode: req.body.zipcode,
-                district: req.body.district,
-                state:req.body.state
-            }    
+            zipcode:req.body.zipcode,
+            place:req.body.place   
         })
         job = await job.save(); 
         res.status(200).json({success:true,job:job}); 
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
-router.get('/getall',async(req,res)=>{
+router.get('/getall', async(req,res)=>{
     try {
-        let jobs = await WantJob.find(); 
+        let jobs = await WantJob.find().sort({date:-1}); ; 
         res.status(200).json({ success:true, jobs:jobs})
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 

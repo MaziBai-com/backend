@@ -7,12 +7,11 @@ const Reviews = require('../../models/Review')
 const FetchUser = require('../FetchUser');
 
 // ROUTER 01 :: SECURED ROUTE :: ADD REVIEW 
-router.post('/add',FetchUser ,async(req,res)=>{
-    const userId = req.user.id;
+router.post('/add' ,async(req,res)=>{
     let success = true  
     try {
         let review = new Reviews({
-            user: userId,
+            name:req.body.name , 
             review: req.body.review,
             rating: req.body.rating 
         }) 
@@ -21,7 +20,6 @@ router.post('/add',FetchUser ,async(req,res)=>{
         res.status(200).json({success,newReview})
     } catch (error) {
         res.status(401).json({success,msg:"Internal Server Error"})
-        console.log(error.message)
     }
 })
 router.get('/getall',async (req,res)=> {
@@ -30,7 +28,6 @@ router.get('/getall',async (req,res)=> {
         res.status(200).json(reviews)
     } catch (error) {
         res.status(401).json({success,msg:"Internal Server Error"})
-        console.log(error.message)
     }
 })
 module.exports = router 

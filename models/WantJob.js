@@ -8,9 +8,11 @@ const MaidRefer = new mongoose.Schema({
         type:String,
         required:true
     },
-    address:{
-        type:Object,
-        required:true 
+    zipcode:{
+        type:String,
+    },
+    place:{
+        type:String 
     }
 })
 module.exports = mongoose.model('jobs',MaidRefer);

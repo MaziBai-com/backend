@@ -30,17 +30,15 @@ router.post('/refer',
         res.status(200).json({success:true,refer:refer}); 
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
 router.get('/getall',async(req,res)=>{
     try {
-        let refers = await MaidRefer.find(); 
+        let refers = await MaidRefer.find().sort({date:-1})
         res.status(200).json({ success:true, refers:refers})
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 

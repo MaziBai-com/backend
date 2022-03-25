@@ -14,8 +14,8 @@ const FetchAdmin = require('../FetchAdmin');
 // all maids 
 router.post('/register',
 [
-    body('firstName').isLength({ min: 1 }),
-    body('phone').isLength({ min: 1 })
+    body('name').isLength({ min: 1 }),
+    body('phone').isLength({ min: 1 }),
 ],
 async (req, res) => {
     const errors = validationResult(req);
@@ -31,7 +31,7 @@ async (req, res) => {
         if(maid.length!=0){
             return res.status(400).json({success:false,msg:"Maid already Exists with this phone"})
         }
-        let {firstName,lastName,phone,gender,DOB,village,street,mandal,zipcode,district,state} = req.body; 
+        let {name ,phone,gender,zipcode  , place} = req.body; 
         
         // generating maid id 
         console.log('hello')
@@ -40,17 +40,11 @@ async (req, res) => {
                 
         maid = new Maids({
             maid_id:number.length+10000,
-            firstName:firstName || '',
-            lastName:lastName || '',
+            name:name , 
             phone:phone || '',
             gender:gender || '',
-            DOB:DOB || '',
-            village:village || '',
-            street:street || '',
-            mandal:mandal || '',
-            zipcode:zipcode || '',
-            district:district || '',
-            state:state || ''
+            place:place || '',
+            zipcode:zipcode || ''
         })
         const newmaid = await maid.save();
         success = true
@@ -63,7 +57,7 @@ async (req, res) => {
 
 // ROUTE TO EDIT THE FIELDS 
 router.put('/edit/:id', FetchAdmin, [
-    body('firstName').isLength({ min: 1 }),
+    body('name').isLength({ min: 1 }),
     body('phone').isLength({ min: 1 }),
 ], async (req, res) => {
     let id = req.params.id; 
@@ -73,36 +67,18 @@ router.put('/edit/:id', FetchAdmin, [
         if (!maid) {            
             return res.status(400).json({ success: false, msg: "Maid Not Found" })
         }
-        const { firstName , lastName , gender , DOB , village , mandal , district , state , zipcode  , phone , street  } = req.body
-        if(firstName){
-            maid.firstName = firstName
-        }
-        if(lastName){
-            maid.lastName = lastName
+        const { name , gender,  zipcode  , phone , place  } = req.body
+        if(name){
+            maid.name = name  
         }
         if(gender){
             maid.gender = gender 
         }
-        if(DOB){
-            maid.DOB = DOB 
-        }
-        if(mandal){
-            maid.mandal = mandal
-        }
-        if(village){
-            maid.mandal = mandal
-        }
-        if(district){
-            maid.district = district
-        }
-        if(state){
-            maid.state = state
-        }
         if(zipcode){
             maid.zipcode = zipcode
         }
-        if(street){
-            maid.street = street
+        if(place){
+            maid.street = place 
         }
         if(phone){
             maid.phone = phone 
@@ -111,17 +87,17 @@ router.put('/edit/:id', FetchAdmin, [
         res.status(200).json({ success: true, maid: updatedMaid })
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
 // route for getting all the user info 
 router.get('/getall' ,async (req, res) => {
-    const maids = await Maids.find();
-    if (maids) {
-        res.status(200).json({success:true,maids:maids});
-    }
-    else {
+    try {
+        const maids = await Maids.find();
+        if (maids) {
+            res.status(200).json({success:true,maids:maids});
+        }
+    } catch (error) {
         res.status(401).json({success:false , msg:"Internal server error "})
     }
 })

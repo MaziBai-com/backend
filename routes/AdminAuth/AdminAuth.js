@@ -22,7 +22,6 @@ router.post('/login',async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({success:false,msg:"Internal Server Error"})
-        console.log(error.message)
     } 
 })
 router.post('/register',async(req,res)=>{

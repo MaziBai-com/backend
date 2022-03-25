@@ -9,46 +9,32 @@ const Bookings = require('../../models/Booking');
 const User = require('../../models/User'); 
 
 // maid booking 
-router.post('/book', FetchUser ,
+router.post('/book',
 [
-    body('email', 'Invalid Email').isEmail()
+    body('phone', 'Invalid Phone').isLength({min:5})
 ],
 async (req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors); 
-        return res.status(401).json({ success:false , msg: "Invalid Email" })
+        return res.status(401).json({ success:false , msg: "Invalid Mobile Number" })
     }
-    // find a user with the email / consists or not 
-    let user = await User.findById(req.user.id); 
     try {
-        if(user.email === req.body.email){
             let booking = new Bookings({
-                firstName:req.body.firstName,
-                lastName:req.body.lastName,
+                name:req.body.name, 
                 email: req.body.email,
                 preferGender:req.body.preferGender,
                 phone:req.body.phone,
                 service:req.body.service,
-                address:{
-                    village:req.body.address.village,
-                    street:req.body.address.street,
-                    mandal:req.body.address.mandal,
-                    zip:req.body.address.zip,
-                    district:req.body.address.district,
-                    state:req.body.address.state 
-                },
+                place:req.body.place,
+                text:req.body.text, 
+                zipcode:req.body.zipcode, 
                 status:'Booked'
             })
             const newBooking = await booking.save();
             success = true
             res.status(200).json({ success, newBooking});
-        }else{
-            res.status(400).json({success:false,msg:"you can only book yourself"})
-        }
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
     
 })
@@ -71,7 +57,6 @@ router.put('/edit/:id', FetchAdmin,async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 // get all bookings 
@@ -84,7 +69,6 @@ router.get('/allbookings',FetchAdmin ,async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 router.get('/userbookings',FetchUser ,async (req,res)=>{
@@ -96,8 +80,7 @@ router.get('/userbookings',FetchUser ,async (req,res)=>{
             res.status(200).json({success:true,bookings});
         }
     } catch (error) {
-        res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
+        res.status(401).json({ success, msg: "Internal Server Error" })
     }
 })
 router.delete('/delete/:id' ,async (req,res)=>{
@@ -112,7 +95,6 @@ router.delete('/delete/:id' ,async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
