@@ -9,7 +9,6 @@ const FetchAdmin = (req,res,next)=>{
         }
     } catch (error) {
         res.status(401).json({success:false,msg:"Internal Server Error"})
-        console.log(error.message)
     }
     
 }

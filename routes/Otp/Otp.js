@@ -26,7 +26,6 @@ router.get("/request",
         // if not validation error
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            console.log(errors); 
             return res.status(401).json({ success:false , msg: "Email or Password Error" })
         }
         try {
@@ -47,7 +46,6 @@ router.get("/request",
                 code: generatedOtp,
             });
             
-            console.log(otp); 
             // save otp in database for checking
             let newOtp = await otp.save();
               
@@ -76,14 +74,11 @@ router.get("/request",
                   html:""
                 }, function (error, info) {
                     if (error) {
-                        console.log(error.message); 
                         res.status(400).json({success:false,msg:"Error in sending email",error:error.message})
                     } else {
-                        console.log("Email sent: " + info.response);
                         res.status(200).json({success:true , info:info.response})
                     }
                 });
-                console.log('Hello '); 
                 
             } catch (error) {
             res.status(401).json({success:false , msg:"Internal Server Error"}); 
@@ -102,7 +97,6 @@ router.post('/validate',
 async (req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors); 
         return res.status(401).json({ success:false , msg: "Email or Password Error" })
     }
     try {

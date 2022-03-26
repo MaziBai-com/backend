@@ -20,7 +20,6 @@ router.post('/add' ,async(req,res)=>{
         res.status(200).json({success,newReview})
     } catch (error) {
         res.status(401).json({success,msg:"Internal Server Error"})
-        console.log(error.message)
     }
 })
 router.get('/getall',async (req,res)=> {
@@ -29,7 +28,6 @@ router.get('/getall',async (req,res)=> {
         res.status(200).json(reviews)
     } catch (error) {
         res.status(401).json({success,msg:"Internal Server Error"})
-        console.log(error.message)
     }
 })
 module.exports = router 
