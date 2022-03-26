@@ -8,7 +8,6 @@ const FetchUser = require('../FetchUser');
 
 // ROUTER 01 :: SECURED ROUTE :: ADD REVIEW 
 router.post('/add' ,async(req,res)=>{
-    const userId = req.user.id;
     let success = true  
     try {
         let review = new Reviews({

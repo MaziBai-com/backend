@@ -23,7 +23,7 @@ const BookingSchema = new mongoose.Schema({
         required:true 
     },
     zipcode:{
-        type:String
+        type:Number
     }, 
     text:{
         type:String

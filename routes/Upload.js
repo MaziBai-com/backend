@@ -34,15 +34,12 @@ const userupload = multer({storage:user})
 // ROUTE to upload image of user 
 router.put('/user', FetchUser , userupload.single('photo') , async(req,res) => {
     try {
-        console.log(req.file)
         let user = await Users.findByIdAndUpdate(req.user.id) 
         user.userImg = req.file.path
         const updatedProfile = await user.save()
-        console.log(user.userImg)
         res.status(200).json({success:true, profile:updatedProfile})    
     } catch (error) {
         res.status(401).json({success:false,msg:"Internal Server Error"})
-        console.log(error.message);
     }
 })
 // ROUTE to upload image of maid 
@@ -56,7 +53,6 @@ router.put('/maid', FetchUser ,maidupload.single('photo') , async(req,res) => {
         res.status(200).json({success:true})    
     } catch (error) {
         res.status(401).json({success,msg:"Internal Server Error"})
-        console.log(error.message);
     }
 })
 module.exports = router 

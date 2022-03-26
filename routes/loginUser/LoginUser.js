@@ -11,7 +11,6 @@ router.get('/getuserinfo', FetchUser , async (req,res)=>{
         res.status(200).json({success,user})
     } catch (error) {
         res.status(401).json({success,msg:"Internal Server Error"})
-        console.log(error.message)
     }
 })
 

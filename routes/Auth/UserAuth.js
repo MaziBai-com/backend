@@ -22,7 +22,6 @@ router.post('/register',
 async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors); 
         return res.status(401).json({ success:false , msg: "Email or Password Error" })
     }
     let success = false
@@ -57,7 +56,6 @@ async (req, res) => {
 
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 // ROUTE 02 : Login a User 
@@ -93,7 +91,6 @@ async (req, res) => {
         res.status(200).json({ success, authToken });
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
@@ -132,7 +129,6 @@ router.put('/edit', FetchUser, [
         res.status(200).json({ success: true, user: updatedUser })
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
@@ -165,7 +161,6 @@ router.post('/googlelogin', async (req, res) => {
                 const email = result.payload.email ; 
                 const image = result.payload.picture ; 
                 let user ; 
-                console.log(result.payload); 
                 success = false ; 
                 if (email_verified) {
                     user = await Users.findOne({ email: email });
@@ -176,7 +171,6 @@ router.post('/googlelogin', async (req, res) => {
                                 id: user.id
                             }
                         }
-                        console.log('logining user')
                         const authToken = jwt.sign(data, JWT_SECRET)
                         success = true
                         res.status(200).json({ success, authToken });
@@ -193,7 +187,6 @@ router.post('/googlelogin', async (req, res) => {
                                 password: hashedPassword,
                                 userImg: image
                             })
-                            console.log(user); 
                             const newUser = await user.save();
                             const data = {
                                 user: {
@@ -205,18 +198,15 @@ router.post('/googlelogin', async (req, res) => {
                             res.status(200).json({ success, authToken });
                         } catch (error) {
                             res.status(401).json({ success, msg: "Internal Server Error" })
-                            console.log(error.message)
                         }
                     }
 
                 }
                 else{
-                    console.log('email not verified'); 
                     res.status(404).json({success:false , msg:"Email Not Verified"})
                 }
             } catch (error) {
                 res.status(400).json({success:false , msg: "Internal Server Error" });
-                console.log(error.msg); 
             }
 })
 

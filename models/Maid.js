@@ -21,7 +21,7 @@ const MaidSchema = new mongoose.Schema({
         type:String
     },
     zipcode:{
-        type:String
+        type:Number 
     },
     date:{
         type:Date,

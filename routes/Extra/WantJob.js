@@ -29,7 +29,6 @@ router.post('/wantjob',
         res.status(200).json({success:true,job:job}); 
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
@@ -39,7 +38,6 @@ router.get('/getall', async(req,res)=>{
         res.status(200).json({ success:true, jobs:jobs})
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 

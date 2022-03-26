@@ -14,7 +14,7 @@ const FetchAdmin = require('../FetchAdmin');
 // all maids 
 router.post('/register',
 [
-    body('firstName').isLength({ min: 1 }),
+    body('name').isLength({ min: 1 }),
     body('phone').isLength({ min: 1 }),
 ],
 async (req, res) => {
@@ -57,7 +57,7 @@ async (req, res) => {
 
 // ROUTE TO EDIT THE FIELDS 
 router.put('/edit/:id', FetchAdmin, [
-    body('firstName').isLength({ min: 1 }),
+    body('name').isLength({ min: 1 }),
     body('phone').isLength({ min: 1 }),
 ], async (req, res) => {
     let id = req.params.id; 
@@ -87,17 +87,17 @@ router.put('/edit/:id', FetchAdmin, [
         res.status(200).json({ success: true, maid: updatedMaid })
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
 // route for getting all the user info 
 router.get('/getall' ,async (req, res) => {
-    const maids = await Maids.find();
-    if (maids) {
-        res.status(200).json({success:true,maids:maids});
-    }
-    else {
+    try {
+        const maids = await Maids.find();
+        if (maids) {
+            res.status(200).json({success:true,maids:maids});
+        }
+    } catch (error) {
         res.status(401).json({success:false , msg:"Internal server error "})
     }
 })

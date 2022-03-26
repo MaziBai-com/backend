@@ -16,13 +16,9 @@ router.post('/book',
 async (req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors); 
         return res.status(401).json({ success:false , msg: "Invalid Mobile Number" })
     }
-    // find a user with the email / consists or not 
-    let user = await User.findById(req.user.id); 
     try {
-        if(user.email === req.body.email){
             let booking = new Bookings({
                 name:req.body.name, 
                 email: req.body.email,
@@ -37,12 +33,8 @@ async (req,res)=>{
             const newBooking = await booking.save();
             success = true
             res.status(200).json({ success, newBooking});
-        }else{
-            res.status(400).json({success:false,msg:"you can only book yourself"})
-        }
     } catch (error) {
         res.status(401).json({ success:false, msg: "Internal Server Error" })
-        console.log(error.message)
     }
     
 })
@@ -65,7 +57,6 @@ router.put('/edit/:id', FetchAdmin,async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 // get all bookings 
@@ -78,7 +69,6 @@ router.get('/allbookings',FetchAdmin ,async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 router.get('/userbookings',FetchUser ,async (req,res)=>{
@@ -91,7 +81,6 @@ router.get('/userbookings',FetchUser ,async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 router.delete('/delete/:id' ,async (req,res)=>{
@@ -106,7 +95,6 @@ router.delete('/delete/:id' ,async (req,res)=>{
         }
     } catch (error) {
         res.status(401).json({ success, msg: "Internal Server Error" })
-        console.log(error.message)
     }
 })
 
