@@ -206,7 +206,7 @@ router.post('/googlelogin', async (req, res) => {
                     res.status(404).json({success:false , msg:"Email Not Verified"})
                 }
             } catch (error) {
-                res.status(400).json({success:false , msg: "Internal Server Error" });
+                res.status(400).json({success:false , msg: "Internal Server Error"+error.message });
             }
 })
 
