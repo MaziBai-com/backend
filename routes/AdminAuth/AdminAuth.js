@@ -6,16 +6,16 @@ const { body, validationResult } = require('express-validator');
 const Admin = require('../../models/Admin')
 // ROUTE 02 : Login a Admin 
 router.post('/login',async (req,res)=>{
-    if(!req.body.email || !req.body.password){
-        return res.status(400).json({success:false,msg:"All fields are required !"})
-    } 
+     
     try {
-        const {email , password } = req.body 
-        let admin = await  Admin.findOne({email:email});
+        if(!req.body.email || !req.body.password){
+            return res.status(400).json({success:false,msg:"All fields are required !"})
+        }
+        let admin = await  Admin.findOne({email:req.body.email});
         if(!admin){
             return res.status(401).json({success:false,msg:"Username or Password Error"})
         }
-        if(admin.password === password){
+        if(admin.password === req.body.password){
             return res.status(200).json({success:true,admin:{email , password}})
         }else{
             return res.status(401).json({success:false,msg:"Login Failed"})
