@@ -147,7 +147,7 @@ router.get('/getall', FetchAdmin ,async (req, res) => {
 // Google Login 
 const { OAuth2Client } = require('google-auth-library')
 
-const CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "746130167111-n7o5qnpn9gns3m0nf75dk72tfton7239.apps.googleusercontent.com"
+const CLIENT_ID = "570279389073-emdgbvuvp9ecienislbuelg2q6vd42is.apps.googleusercontent.com"
 
 const client = new OAuth2Client(CLIENT_ID)
 
