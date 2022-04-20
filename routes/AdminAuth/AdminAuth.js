@@ -16,7 +16,7 @@ router.post('/login',async (req,res)=>{
             return res.status(401).json({success:false,msg:"Username or Password Error"})
         }
         if(admin.password === req.body.password){
-            return res.status(200).json({success:true,admin:{email , password}})
+            return res.status(200).json({success:true,admin:admin.email})
         }else{
             return res.status(401).json({success:false,msg:"Login Failed"})
         }
